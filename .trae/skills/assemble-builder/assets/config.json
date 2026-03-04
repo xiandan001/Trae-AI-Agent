@@ -1,0 +1,11 @@
+{
+  "defaultFlavor": null,
+  "defaultBuildType": "Debug",
+  "alwaysUseCache": true,
+  "alwaysParallel": true,
+  "configureOnDemand": true,
+  "buildAliases": {},
+  "gradleArgs": [],
+  "outputDir": null,
+  "cleanBeforeBuild": false
+}

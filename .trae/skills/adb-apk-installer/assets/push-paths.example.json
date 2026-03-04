@@ -1,0 +1,29 @@
+{
+  "_说明": "这是APK推送路径配置的示例文件，请根据实际需求修改push-paths.json",
+  "_使用方法": "将此文件的内容复制到push-paths.json中，并修改为您的实际路径",
+
+  "常见系统应用路径示例": {
+    "system-app.apk": "/system/app/SystemApp/",
+    "privileged-app.apk": "/system/priv-app/PrivilegedApp/",
+    "system-ext-app.apk": "/system_ext/app/SystemExtApp/",
+    "vendor-app.apk": "/vendor/app/VendorApp/"
+  },
+
+  "自定义应用示例": {
+    "C:/Users/yourname/Desktop/myapp.apk": "/system/priv-app/MyApp/",
+    "D:/projects/android/build/app-release.apk": "/system/app/AppRelease/"
+  },
+
+  "临时测试路径示例": {
+    "test-app.apk": "/data/local/tmp/",
+    "debug-app.apk": "/sdcard/Download/"
+  },
+
+  "_提示": [
+    "1. 推送到 /system/ 路径需要设备解锁并获取root权限",
+    "2. 推送到 /system/priv-app/ 的应用将获得系统特权",
+    "3. 推送到 /data/app/ 会使用普通的install方式，不需要root",
+    "4. 使用绝对路径作为key可以避免路径冲突",
+    "5. 推送后需要设置正确的文件权限（通常是644）"
+  ]
+}
