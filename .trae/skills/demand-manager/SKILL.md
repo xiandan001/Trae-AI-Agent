@@ -114,7 +114,7 @@ description: 用于Android应用开发的需求分析、需求设计和需求实
 
 **正确示例 - 使用ConstraintLayout作为主布局**：
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 使用ConstraintLayout作为主布局容器 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -132,7 +132,7 @@ description: 用于Android应用开发的需求分析、需求设计和需求实
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 **错误示例 - 使用LinearLayout作为主布局**：
@@ -172,7 +172,7 @@ description: 用于Android应用开发的需求分析、需求设计和需求实
 ##### 2.3.4 特殊场景处理
 **简单线性布局场景**：当只需要简单的垂直或水平排列时，可以使用LinearLayout：
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 简单按钮组使用LinearLayout是可以接受的 -->
 <LinearLayout
     android:layout_width="wrap_content"
@@ -193,7 +193,7 @@ description: 用于Android应用开发的需求分析、需求设计和需求实
         android:layout_marginStart="12dp" />
 
 </LinearLayout>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 #### 2.4 架构设计
@@ -242,9 +242,9 @@ UI设计流程:
 #### 3.2 代码规范
 确保所有代码注释符合规范:
 - 类注释使用Javadoc格式,包含label、desc、author、time
-- 方法中的代码修改使用`// XBH_AI_PATCH_START`和`// XBH_AI_PATCH_END`包围
-- 如存在原代码,保留并注释,添加`// XBH_AI_PATCH_MODIFY`标签
-- XML文件修改使用`<!-- XBH_AI_PATCH_START -->`和`<!-- XBH_AI_PATCH_END -->`包围
+- 方法中的代码修改使用`// AI_AGENT_PATCH_START`和`// AI_AGENT_PATCH_END`包围
+- 如存在原代码,保留并注释,添加`// AI_AGENT_PATCH_MODIFY`标签
+- XML文件修改使用`<!-- AI_AGENT_PATCH_START -->`和`<!-- AI_AGENT_PATCH_END -->`包围
 
 #### 3.3 生成开发实现文档
 使用`assets/demand_implementation_template.md`模板,为每个需求或子模块生成开发实现文档,保存在:

@@ -42,7 +42,7 @@ skills_reference: ["defect-analyzer", "demand-implementation"]
    - 修改 AndroidManifest.xml 添加权限声明
    - 创建或修改 Service/后台任务代码
    - 添加线程安全和内存优化代码
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **【强制】输出结果**
    - 写入 `outputs/system.json` 输出分析报告
@@ -98,7 +98,7 @@ skills_reference: ["defect-analyzer", "demand-implementation"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java`, `.xml` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -132,7 +132,7 @@ skills_reference: ["defect-analyzer", "demand-implementation"]
 | rule_2 | 必须读取 outputs/plan.json 获取规划信息 |
 | rule_3 | **【关键】** 必须调用 Skill: defect-analyzer 进行系统问题分析 |
 | rule_4 | 必须执行代码开发，创建或修改必要的系统层文件 |
-| rule_5 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_5 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_6 | 输出必须写入 outputs/system.json |
 | rule_7 | 代码变更必须记录到 code_changes/system.json |
 | rule_8 | **【消息】** 必须写入 messages/system_to_lead.json |

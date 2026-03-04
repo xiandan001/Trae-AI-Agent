@@ -45,7 +45,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 4. **【代码开发】创建项目结构**
    - 创建必要的目录结构
    - 创建基础接口/抽象类
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **【强制】输出结果**
    - 写入 `outputs/plan.json` 输出执行计划（包含多方案）
@@ -139,7 +139,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java`, `.xml` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -190,7 +190,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 | rule_4 | **【关键】** 必须制定至少 2-3 个可选方案 |
 | rule_5 | 每个方案必须包含：plan_id, description, pros, cons, risks |
 | rule_6 | 必须执行代码开发，创建必要的项目结构 |
-| rule_7 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_7 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_8 | 输出必须写入 outputs/plan.json（包含多方案） |
 | rule_9 | 代码变更必须记录到 code_changes/plan.json |
 | rule_10 | 输出中必须包含 recommendation 字段 |

@@ -14,7 +14,7 @@
 
 ```
 #652126 【UI】外设移除后，OSD设置的麦克风、摄像头一级菜单仍显示历史接入的外设名称
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 ```
 
 ### 可选输入信息
@@ -102,11 +102,11 @@ How:
   - 两边各留一个空格
   - 仓库间用英文逗号分隔，**无空格**
   - 仓库名为最顶层目录名或通用名称
-- **单仓库提交**：**当前项目名，例如[XbhAiScreen]**
+- **单仓库提交**：**当前项目名，例如[xxxAiScreen]**
 
 **示例**：
 - 多仓库：`BUG-652126: [app,lib_middleware5]标题 `
-- 单仓库：`BUG-652126: [XbhAiScreen]标题`
+- 单仓库：`BUG-652126: [xxxAiScreen]标题`
 
 #### 1.5 part标记
 
@@ -135,7 +135,7 @@ How:
 #### 2.2 链接示例
 
 ```
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 ```
 
 #### 2.3 注意事项
@@ -217,7 +217,7 @@ How:
 ```
 BUG-652126:[UI]外设移除后，OSD设置的麦克风、摄像头一级菜单仍显示历史接入的外设名称
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于memoryEnabled=false时直接使用getDefaultDigitalMic()和getUsingCameraName()获取设备名称，但这两个方法返回的是历史保存的设备信息，没有检查设备是否仍在当前连接的设备列表中；
@@ -231,7 +231,7 @@ How:
 ```
 STORY-652127:[系统]新增设备热插拔功能 [app,lib_middleware5]
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/AbCdEfGhIjKlMnOpQ
+https://xxx
 
 Why:
 1、由于现有系统不支持设备热插拔，用户需要在插入设备后重启系统才能识别，影响使用体验；
@@ -246,7 +246,7 @@ How:
 ```
 BUG-652128:[性能]优化视频解码性能 [framework]part2
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/1234567890abcdef
+https://xxx
 
 Why:
 1、由于视频解码在4K分辨率下存在性能瓶颈，导致播放卡顿和延迟；
@@ -265,7 +265,7 @@ How:
 ```
 BUG-652130:[UI]设置界面的按钮点击无响应
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于SettingsFragment中按钮的OnClickListener被错误地设置为null，导致点击事件无法触发；
@@ -280,7 +280,7 @@ How:
 ```
 STORY-652131:[系统]新增蓝牙配对功能
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于用户需求增加蓝牙设备连接功能，以支持无线音频输入；
@@ -296,7 +296,7 @@ How:
 ```
 STORY-652132:[性能]优化系统启动速度 [framework,vendor]
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于系统启动时加载了过多的服务和模块，导致启动时间过长（约20秒），影响用户体验；
@@ -312,7 +312,7 @@ How:
 ```
 STORY-652133:[架构]重构网络请求模块 [app,lib_network,framework]part2
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于原有网络请求模块代码耦合度高，难以维护和扩展；
@@ -328,7 +328,7 @@ How:
 ```
 STORY-652134:[文档]更新API文档
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于新增了多个API接口，需要更新文档以保持同步；
@@ -344,7 +344,7 @@ How:
 ```
 BUG-652135:[UI]修复设置菜单滚动问题并优化动画效果
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于RecyclerView未启用ItemViewCache且使用了复杂的布局计算，导致滚动时频繁创建和销毁视图，造成卡顿；
@@ -360,7 +360,7 @@ How:
 ```
 BUG-652136:[安全]修复敏感信息泄露问题
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于日志输出中包含了用户的敏感信息（如token、密码），存在信息泄露风险；
@@ -376,7 +376,7 @@ How:
 ```
 BUG-652137:[兼容性]修复Android 8.0以下系统崩溃问题
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于使用了Android 8.0引入的新API，在低版本系统上运行时导致崩溃；
@@ -392,7 +392,7 @@ How:
 ```
 STORY-652138:[架构]重构数据持久化模块
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于原有数据持久化模块使用了SharedPreference存储复杂数据，导致数据解析效率低且难以扩展；
@@ -408,7 +408,7 @@ How:
 ```
 STORY-652139:[国际化]新增多语言支持
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于产品需要拓展海外市场，需要支持英文、日文等多语言；
@@ -495,7 +495,7 @@ Why:
 **错误**：
 ```
 BUG-652126:标题 [app]
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 Why:
 1、由于xxx;
 ```
@@ -504,7 +504,7 @@ Why:
 ```
 BUG-652126:标题 [app]
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/Bq3dMrE6RUZCwZhV
+https://xxx
 
 Why:
 1、由于xxx;

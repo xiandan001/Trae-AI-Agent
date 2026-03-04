@@ -174,9 +174,9 @@ adb install -r -d -t <apk_path>
 **default-push-path.json 配置格式**：
 ```json
 {
-  "XbhAiScreen": {
-    "defaultPath": "/system/app/XbhAiScreen/",
-    "apkName": "XbhAiScreen.apk"
+  "Launcher": {
+    "defaultPath": "/system/app/Launcher/",
+    "apkName": "Launcher.apk"
   }
 }
 ```

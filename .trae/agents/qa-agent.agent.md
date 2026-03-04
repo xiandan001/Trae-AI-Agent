@@ -41,7 +41,7 @@ skills_reference: ["test-executor"]
    - 创建单元测试文件
    - 创建集成测试文件
    - 创建 UI 测试文件（如需要）
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **执行测试验证**
 
@@ -114,7 +114,7 @@ skills_reference: ["test-executor"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -149,7 +149,7 @@ skills_reference: ["test-executor"]
 | rule_3 | 必须读取所有 code_changes/*.json 了解代码变更 |
 | rule_4 | **【关键】** 必须调用 Skill: test-executor |
 | rule_5 | 必须执行测试代码开发，创建必要的测试文件 |
-| rule_6 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_6 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_7 | 输出必须写入 outputs/qa.json |
 | rule_8 | 代码变更必须记录到 code_changes/qa.json |
 | rule_9 | **【消息】** 必须写入 messages/qa_to_lead.json |

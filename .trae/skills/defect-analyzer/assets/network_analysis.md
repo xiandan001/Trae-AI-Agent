@@ -153,7 +153,7 @@ adb shell nslookup www.baidu.com
            ks.store(fos, null);
            fos.close();
        } catch (Exception e) {
-           Log.e(TAG, "安装企业证书失败", e);
+           Log.e(TAG, "安装企业证书失败: " + e);
        }
    }
    ```
@@ -365,7 +365,7 @@ adb shell nslookup www.baidu.com
            sig.update(policyData);
            return sig.verify(signature);
        } catch (Exception e) {
-           Log.e(TAG, "验证设备策略签名失败", e);
+           Log.e(TAG, "验证设备策略签名失败: " + e);
            return false;
        }
    }

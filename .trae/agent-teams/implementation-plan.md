@@ -11,7 +11,7 @@
 │              TodoWrite = 共享任务列表                             │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  Lango-Agent-Teams              Trae 实现                        │
+│  Agent-Teams                    Trae 实现                        │
 │  ──────────────────             ──────────                       │
 │  TaskCreate(subject, desc)  →   TodoWrite(todos=[{id, content}]) │
 │  TaskUpdate(status)         →   TodoWrite(todos=[{status}])      │
@@ -82,7 +82,7 @@
 │              Task + 共享状态 = Teammate 模式                       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  Lango-Agent-Teams              Trae 实现                        │
+│  Agent-Teams                    Trae 实现                        │
 │  ──────────────────             ──────────                       │
 │  Task(team_name, name)   →   Task(subagent_type, description)   │
 │  teammate 加入团队        →   SubAgent 读写共享状态文件           │
@@ -314,7 +314,7 @@ Orchestrator 执行：
 
 ## 总结
 
-| 功能 | Lango-Agent-Teams | Trae 实现 | 效果 |
+| 功能 |    Agent-Teams    | Trae 实现 | 效果 |
 |------|-------------------|-----------|------|
 | **共享任务列表** | TeamCreate + TaskCreate | TodoWrite | ✅ 用户实时可见 |
 | **实时消息系统** | SendMessage | 文件系统 + 轮询 | ✅ 消息可追踪 |

@@ -27,7 +27,7 @@ description: 用于Android应用开发bug或者问题分析，当用户输入问
 问题类型：崩溃
 复现概率：100%
 复现手法：1. 打开应用 2. 输入用户名密码 3. 点击登录按钮
-Product Flavor：xbh
+Product Flavor：xxx
 ```
 
 #### 显式调用
@@ -39,7 +39,7 @@ Product Flavor：xbh
 问题类型：崩溃
 复现概率：100%
 复现手法：1. 打开应用 2. 输入用户名密码 3. 点击登录按钮
-Product Flavor：xbh
+Product Flavor：xxx
 ```
 
 ### 技能协作
@@ -183,7 +183,7 @@ defect-analyzer技能可以与其他技能协作：
 - **问题类型**：如崩溃、性能问题、UI问题、网络问题、功能性问题等
 - **复现概率**：如100%复现、偶现等
 - **复现手法**：详细的复现步骤
-- **Product Flavor**：如xbh、iiyama等
+- **Product Flavor**：如xxx、iiyama等
 
 ### 问题类型映射
 系统会根据以下映射关系将用户输入的问题类型映射到对应的文件夹：
@@ -220,7 +220,7 @@ defect-analyzer技能可以与其他技能协作：
 复现手法：1. 打开应用 2. 输入用户名密码 3. 点击登录按钮
 设备型号：Pixel 6
 Android版本：13
-Product Flavor：xbh
+Product Flavor：xxx
 ```
 
 #### 缺失信息示例（验证失败）
@@ -243,7 +243,7 @@ Product Flavor：xbh
 
 按照Product Flavor和Android缺陷类型分类的文件夹结构：
 
-- `xbh/` - XBH flavor的缺陷分析文档
+- `xxx/` - xxx flavor的缺陷分析文档
   - `crash/` - Crash-related defect analysis documents
   - `performance/` - Performance-related defect analysis documents
   - `ui/` - UI-related defect analysis documents
@@ -338,62 +338,52 @@ Product Flavor：xbh
 
 ## 日志使用规范
 
-### XbhLog日志组件
+### Android原生Log组件
 
-在缺陷修复过程中，如果需要添加或修改日志，必须使用项目统一的XbhLog日志组件，禁止使用Android原生Log或其他日志库。
-
-#### 依赖配置
-
-在Module的build.gradle中添加依赖：
-```gradle
-dependencies {
-    implementation 'com.xbh.ability:log:0.0.8'
-}
-```
+在缺陷修复过程中，如果需要添加或修改日志，使用Android原生Log类进行日志打印。
 
 #### 日志级别说明
 
 | 级别 | 常量 | 值 | 使用场景 |
 |------|------|-----|---------|
-| VERBOSE | XbhLog.VERBOSE | 2 | 详细的调试信息，通常只在开发阶段使用 |
-| DEBUG | XbhLog.DEBUG | 3 | 调试信息，帮助开发者了解程序的运行状态 |
-| INFO | XbhLog.INFO | 4 | 一般信息，反映程序的正常运行情况 |
-| WARN | XbhLog.WARN | 5 | 潜在问题或非关键错误，提示开发者注意 |
-| ERROR | XbhLog.ERROR | 6 | 严重错误，影响程序的正常运行，需要及时处理 |
+| VERBOSE | Log.VERBOSE | 2 | 详细的调试信息，通常只在开发阶段使用 |
+| DEBUG | Log.DEBUG | 3 | 调试信息，帮助开发者了解程序的运行状态 |
+| INFO | Log.INFO | 4 | 一般信息，反映程序的正常运行情况 |
+| WARN | Log.WARN | 5 | 潜在问题或非关键错误，提示开发者注意 |
+| ERROR | Log.ERROR | 6 | 严重错误，影响程序的正常运行，需要及时处理 |
 
 #### 日志使用示例
 
 ```java
-// XBH_AI_PATCH_START
-// 使用XbhLog打印日志
-// XBH_AI_PATCH_MODIFY
-XbhLog.v(TAG, "Verbose message");           // 详细日志
-XbhLog.d("Debug message");                   // 调试日志（使用全局TAG）
-XbhLog.i(TAG, "Info message");              // 信息日志
-XbhLog.w(TAG, "Warning message");           // 警告日志
-XbhLog.e(TAG, "Error message", exception);  // 错误日志（带异常）
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_START
+// 使用Log打印日志
+// AI_AGENT_PATCH_MODIFY
+Log.v(TAG, "Verbose message");           // 详细日志
+Log.d(TAG, "Debug message");              // 调试日志
+Log.i(TAG, "Info message");               // 信息日志
+Log.w(TAG, "Warning message");            // 警告日志
+Log.e(TAG, "Error message: " + exception);   // 错误日志（带异常）
+// AI_AGENT_PATCH_END
 ```
 
 ```kotlin
-// XBH_AI_PATCH_START
-// 使用XbhLog打印日志
-// XBH_AI_PATCH_MODIFY
-XbhLog.v(TAG, "Verbose message")
-XbhLog.d("Debug message")
-XbhLog.i(TAG, Any())  // 支持打印对象
-XbhLog.w(Any())       // 使用全局TAG
-XbhLog.e(TAG, "Error message", RuntimeException())
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_START
+// 使用Log打印日志
+// AI_AGENT_PATCH_MODIFY
+Log.v(TAG, "Verbose message")
+Log.d(TAG, "Debug message")
+Log.i(TAG, "Info message")
+Log.w(TAG, "Warning message")
+Log.e(TAG, "Error message: " + exception);
+// AI_AGENT_PATCH_END
 ```
 
 #### 日志使用原则
 
-1. **首次使用检查**：在添加日志前，需检查项目是否已添加XbhLog依赖，如未添加需先添加依赖
-2. **禁止使用其他日志库**：不得使用Android原生Log、Timber等其他日志库
-3. **日志级别选择**：根据日志内容的重要性选择合适的日志级别
-4. **敏感信息保护**：禁止在日志中打印敏感信息（密码、token等）
-5. **TAG命名规范**：使用类名作为TAG，格式为：`private static final String TAG = "ClassName";`
+1. **日志级别选择**：根据日志内容的重要性选择合适的日志级别
+2. **敏感信息保护**：禁止在日志中打印敏感信息（密码、token等）
+3. **TAG命名规范**：使用类名作为TAG，格式为：`private static final String TAG = "ClassName";`
+4. **性能考虑**：避免在循环中频繁打印日志，建议使用BuildConfig.DEBUG控制调试日志输出
 
 ## 技能协作
 

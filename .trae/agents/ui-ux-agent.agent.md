@@ -41,7 +41,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 4. **【代码开发】执行开发**
    - 创建或修改布局 XML 文件
    - 创建或修改 UI 组件代码
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **【强制】输出结果**
    - 写入 `outputs/ui_ux.json` 输出分析报告
@@ -97,7 +97,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java`, `.xml` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -132,7 +132,7 @@ skills_reference: ["demand-implementation", "defect-analyzer"]
 | rule_2 | 必须读取 outputs/plan.json 获取规划信息 |
 | rule_3 | **【关键】** 必须根据 task_type 调用对应的 Skill |
 | rule_4 | 必须执行代码开发，创建或修改必要的 UI 文件 |
-| rule_5 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_5 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_6 | 输出必须写入 outputs/ui_ux.json |
 | rule_7 | 代码变更必须记录到 code_changes/ui_ux.json |
 | rule_8 | **【消息】** 必须写入 messages/ui_ux_to_lead.json |

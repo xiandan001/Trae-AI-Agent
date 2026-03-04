@@ -216,108 +216,85 @@ description: Android应用代码提交前规范检查技能。在代码提交到
    - 验证资源是否合理复用
    - 检查多语言支持是否完善
 
-6. **日志使用规范检查** 【严重问题】
+6. **日志使用规范检查**
    
-   **严重程度：严重** - 使用非XbhLog日志组件属于严重问题，必须强制修改。
+   检查代码中的日志使用是否符合Android日志规范：
    
-   检查代码中的日志使用是否符合XbhLog日志组件规范：
-   
-   **（1）依赖检查（首次使用时）**
-   - 检查项目是否已添加XbhLog依赖
-   - 依赖配置：`implementation 'com.xbh.ability:log:0.0.8'`
-   - 如果未添加依赖，**必须主动添加依赖**
-   
-   **（2）日志组件使用检查【强制】**
-   - **强制要求使用XbhLog日志组件**
-   - **禁止使用Android原生Log**（Log.v、Log.d、Log.i、Log.w、Log.e等）
-   - **禁止使用Timber等其他日志库**
-   - **禁止使用项目中的LogUtils**（如果有）
-   - 发现使用非XbhLog日志组件时，**必须主动修改为XbhLog**
+   **（1）日志组件使用检查**
+   - 使用Android原生Log类进行日志打印
+   - 确保日志级别使用正确
+   - 避免在发布版本中打印敏感信息
    
    **正确示例：**
    ```java
-   // XBH_AI_PATCH_START
-   // 使用XbhLog打印日志
-   // XBH_AI_PATCH_MODIFY
-   XbhLog.v(TAG, "Verbose message");
-   XbhLog.d("Debug message");
-   XbhLog.i(TAG, "Info message");
-   XbhLog.w(TAG, "Warning message");
-   XbhLog.e(TAG, "Error message", exception);
-   // XBH_AI_PATCH_END
-   ```
-   
-   **错误示例（发现后必须立即修改）：**
-   ```java
-   // 错误：使用Android原生Log - 必须修改为XbhLog
+   // AI_AGENT_PATCH_START
+   // 使用Log打印日志
+   // AI_AGENT_PATCH_MODIFY
+   Log.v(TAG, "Verbose message");
    Log.d(TAG, "Debug message");
-   Log.e(TAG, "Error message");
-   
-   // 错误：使用Timber - 必须修改为XbhLog
-   Timber.d("Debug message");
-   
-   // 错误：使用LogUtils - 必须修改为XbhLog
-   LogUtils.d(TAG, "Debug message");
+   Log.i(TAG, "Info message");
+   Log.w(TAG, "Warning message");
+   Log.e(TAG, "Error message: " + exception);
+   // AI_AGENT_PATCH_END
    ```
    
-   **（3）日志级别检查**
+   **（2）日志级别检查**
    - 检查日志级别是否选择正确
-   - VERBOSE(2)：详细的调试信息
-   - DEBUG(3)：调试信息
-   - INFO(4)：一般信息
-   - WARN(5)：潜在问题警告
-   - ERROR(6)：严重错误
+   - VERBOSE(2)：详细的调试信息，仅用于开发调试
+   - DEBUG(3)：调试信息，用于调试目的
+   - INFO(4)：一般信息，用于记录重要操作
+   - WARN(5)：潜在问题警告，用于记录可能的问题
+   - ERROR(6)：严重错误，用于记录错误和异常
    
-   **（4）TAG命名检查**
+   **（3）TAG命名检查**
    - 检查TAG是否使用类名
    - 格式：`private static final String TAG = "ClassName";`
+   - TAG命名应简洁明了，便于日志过滤和定位
    
-   **（5）敏感信息检查**
+   **（4）敏感信息检查**
    - 检查是否在日志中打印敏感信息
-   - 禁止打印：密码、token、身份证号、银行卡号等
+   - 禁止打印：密码、token、身份证号、银行卡号、私钥等
+   - 敏感数据应在打印前进行脱敏处理
    
-   **【强制修复要求】：**
-   当发现日志使用不符合规范时，**必须主动执行以下修改**：
+   **（5）性能考虑**
+   - 避免在循环中频繁打印日志
+   - 避免在主线程进行大量日志拼接操作
+   - 考虑使用BuildConfig.DEBUG控制日志输出
    
-   1. **依赖添加**：如果项目未添加XbhLog依赖，在build.gradle中添加：
-      ```gradle
-      dependencies {
-          implementation 'com.xbh.ability:log:0.0.8'
-      }
-      ```
+   **（6）日志规范最佳实践**
    
-   2. **日志替换**：将所有非XbhLog日志调用替换为XbhLog：
-      ```java
-      // 替换前
-      Log.d(TAG, "message");
-      Log.e(TAG, "error", exception);
-      
-      // 替换后
-      // XBH_AI_PATCH_START
-      // 替换为XbhLog日志组件
-      // XBH_AI_PATCH_MODIFY
-      XbhLog.d(TAG, "message");
-      XbhLog.e(TAG, "error", exception);
-      // XBH_AI_PATCH_END
-      ```
+   ```java
+   public class ExampleClass {
+       private static final String TAG = "ExampleClass";
+       
+       public void processData(String data) {
+           // 开发调试日志
+           if (BuildConfig.DEBUG) {
+               Log.d(TAG, "Processing data: " + sanitize(data));
+           }
+           
+           try {
+               // 业务逻辑
+               Log.i(TAG, "Data processed successfully");
+           } catch (Exception e) {
+               Log.e(TAG, "Failed to process data:" + e);
+           }
+       }
+       
+       private String sanitize(String data) {
+           // 脱敏处理，避免打印敏感信息
+           return data != null ? "***" : "null";
+       }
+   }
+   ```
    
-   3. **日志级别映射**：
-      | 原日志调用 | XbhLog替换 |
-      |-----------|-----------|
-      | Log.v() | XbhLog.v() |
-      | Log.d() | XbhLog.d() |
-      | Log.i() | XbhLog.i() |
-      | Log.w() | XbhLog.w() |
-      | Log.e() | XbhLog.e() |
-      | Timber.d() | XbhLog.d() |
-      | LogUtils.d() | XbhLog.d() |
-   
-   4. **添加import语句**：在文件顶部添加XbhLog的import：
-      ```java
-      import com.xbh.log.XbhLog;
-      ```
+   **修复建议：**
+   - 如果发现日志级别使用不当，调整到合适的级别
+   - 如果发现敏感信息打印，立即移除或进行脱敏处理
+   - 如果TAG命名不规范，修改为类名或清晰的标识
+   - 建议在发布版本中关闭或减少DEBUG和VERBOSE级别的日志
 
-7. **XBH注释规范检查**
+7. **xxx注释规范检查**
    
    **适用范围：** 覆盖文件类型包括：java、kotlin、xml等主流语言文件。
 
@@ -327,21 +304,21 @@ description: Android应用代码提交前规范检查技能。在代码提交到
 
    **必须使用**以下格式包围修改的代码：
    ```java
-   // XBH_AI_PATCH_START
+   // AI_AGENT_PATCH_START
    // (若存在原代码则保留并注释)
-   // XBH_AI_PATCH_MODIFY (若存在原代码则必须加上该标签)
+   // AI_AGENT_PATCH_MODIFY (若存在原代码则必须加上该标签)
    // 具体修改内容的注释说明
    生成或修改的代码
-   // XBH_AI_PATCH_END
+   // AI_AGENT_PATCH_END
    ```
 
    **检查要点：**
-   - 检查修改的代码块是否使用 `XBH_AI_PATCH_START` 和 `XBH_AI_PATCH_END` 包围
-   - 如果存在原代码，是否使用 `XBH_AI_PATCH_MODIFY` 标签
+   - 检查修改的代码块是否使用 `AI_AGENT_PATCH_START` 和 `AI_AGENT_PATCH_END` 包围
+   - 如果存在原代码，是否使用 `AI_AGENT_PATCH_MODIFY` 标签
    - **重要区别**：
-     - **新建文件**：不需要 `XBH_AI_PATCH_MODIFY` 标签（只针对整个文件是新建的情况）
-     - **在现有文件中新增方法/变量**：不需要 `XBH_AI_PATCH_MODIFY` 标签
-     - **修改现有代码**：必须使用 `XBH_AI_PATCH_MODIFY` 标签
+     - **新建文件**：不需要 `AI_AGENT_PATCH_MODIFY` 标签（只针对整个文件是新建的情况）
+     - **在现有文件中新增方法/变量**：不需要 `AI_AGENT_PATCH_MODIFY` 标签
+     - **修改现有代码**：必须使用 `AI_AGENT_PATCH_MODIFY` 标签
    - 是否有具体的修改内容注释说明
    - 标签格式是否正确
    
@@ -350,7 +327,7 @@ description: Android应用代码提交前规范检查技能。在代码提交到
    **必须在类定义前添加**以下格式的Javadoc注释：
    ```java
    /**
-    * label: XBH_AI_PATCH
+    * label: AI_AGENT_PATCH
     * desc: 类的功能描述
     * author: 开发者名称
     * time: YYYY-MM-DD HH:mm:ss
@@ -362,7 +339,7 @@ description: Android应用代码提交前规范检查技能。在代码提交到
    
    **检查要点：**
    - 检查新生成的类是否有Javadoc注释
-   - 是否包含 `label: XBH_AI_PATCH` 标签
+   - 是否包含 `label: AI_AGENT_PATCH` 标签
    - 是否包含类功能描述（desc）
    - 是否包含开发者名称（author）
    - 是否包含时间戳（time），格式为 YYYY-MM-DD HH:mm:ss
@@ -372,26 +349,26 @@ description: Android应用代码提交前规范检查技能。在代码提交到
    
    **必须使用**以下格式包围修改的代码：
    ```xml
-   <!-- XBH_AI_PATCH_START -->
+   <!-- AI_AGENT_PATCH_START -->
    <!-- (若存在原代码则保留并注释) -->
-   <!-- XBH_AI_PATCH_MODIFY (若存在原代码则必须加上该标签) -->
+   <!-- AI_AGENT_PATCH_MODIFY (若存在原代码则必须加上该标签) -->
    <!-- 具体修改内容的注释说明 -->
    生成或修改的XML代码
-   <!-- XBH_AI_PATCH_END -->
+   <!-- AI_AGENT_PATCH_END -->
    ```
    
    **检查要点：**
-   - 检查修改的XML代码块是否使用 `XBH_AI_PATCH_START` 和 `XBH_AI_PATCH_END` 包围
-   - 如果存在原代码，是否使用 `XBH_AI_PATCH_MODIFY` 标签
+   - 检查修改的XML代码块是否使用 `AI_AGENT_PATCH_START` 和 `AI_AGENT_PATCH_END` 包围
+   - 如果存在原代码，是否使用 `AI_AGENT_PATCH_MODIFY` 标签
    - **重要区别**：
-     - **新建XML文件**：不需要 `XBH_AI_PATCH_MODIFY` 标签
-     - **在现有XML中新增元素/属性**：不需要 `XBH_AI_PATCH_MODIFY` 标签
-     - **修改现有XML元素/属性**：必须使用 `XBH_AI_PATCH_MODIFY` 标签
+     - **新建XML文件**：不需要 `AI_AGENT_PATCH_MODIFY` 标签
+     - **在现有XML中新增元素/属性**：不需要 `AI_AGENT_PATCH_MODIFY` 标签
+     - **修改现有XML元素/属性**：必须使用 `AI_AGENT_PATCH_MODIFY` 标签
    - 是否有具体的修改内容注释说明
    - XML注释格式是否正确
    
    **修复建议：**
-   - 如果发现代码修改缺少XBH注释标签，需要添加相应的注释
+   - 如果发现代码修改缺少xxx注释标签，需要添加相应的注释
    - 如果是新生成的类，需要添加规范的Javadoc注释
    - 确保所有注释格式符合规范要求
 

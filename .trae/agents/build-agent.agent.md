@@ -41,7 +41,7 @@ skills_reference: ["assemble-builder"]
    - 修改 app/build.gradle 添加依赖
    - 修改 project/build.gradle 更新仓库配置
    - 修改 gradle.properties 配置编译选项
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **【强制】输出结果**
    - 写入 `outputs/build.json` 输出分析报告
@@ -96,7 +96,7 @@ skills_reference: ["assemble-builder"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.gradle`, `.kts`, `.properties` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -130,7 +130,7 @@ skills_reference: ["assemble-builder"]
 | rule_2 | 必须读取 outputs/plan.json 获取规划信息 |
 | rule_3 | **【关键】** 必须调用 Skill: assemble-builder |
 | rule_4 | 必须执行构建配置修改 |
-| rule_5 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_5 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_6 | 输出必须写入 outputs/build.json |
 | rule_7 | 代码变更必须记录到 code_changes/build.json |
 | rule_8 | **【消息】** 必须写入 messages/build_to_lead.json |

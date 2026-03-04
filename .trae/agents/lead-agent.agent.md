@@ -83,7 +83,7 @@ skills_reference: ["demand-manager", "defect-document-generator", "code-complian
 3. **【代码开发】执行整合**
    - 解决代码冲突（如有）
    - 整合所有代码变更
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 4. **【强制】输出最终决策**
    - 写入 `outputs/lead_final.json` 最终决策
@@ -196,7 +196,7 @@ skills_reference: ["demand-manager", "defect-document-generator", "code-complian
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java`, `.xml`, `.gradle` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ### 工作目录
 
@@ -260,7 +260,7 @@ skills_reference: ["demand-manager", "defect-document-generator", "code-complian
 | rule_10 | 最终决策前必须读取所有 outputs/*.json |
 | rule_11 | 最终决策前必须读取所有 code_changes/*.json |
 | rule_12 | 必须执行代码整合，解决冲突 |
-| rule_13 | 代码修改必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_13 | 代码修改必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_14 | 最终决策必须写入 outputs/lead_final.json |
 | rule_15 | 代码变更必须记录到 code_changes/lead_final.json |
 | rule_16 | 最终决策必须更新 state.json 中 final_decision 字段 |

@@ -19,7 +19,7 @@ description: 将 worktree 工作区的修改合并到当前分支
 
 ## 典型用户请求
 
-- "帮我把 xbh 仓库的 debug1_branch 工作区的修改合到当前分支"
+- "帮我把 xxx 仓库的 debug1_branch 工作区的修改合到当前分支"
 - "合并 worktree 分支到主分支"
 - "将 debug1_branch 合并进来"
 
@@ -77,16 +77,16 @@ git merge <分支名>
 
 ## 执行示例
 
-**用户请求**："帮我把 xbh 仓库的 debug1_branch 工作区的修改合到当前分支"
+**用户请求**："帮我把 xxx 仓库的 debug1_branch 工作区的修改合到当前分支"
 
 **执行步骤**：
 
 ```bash
 # 1. 提取信息
-# 仓库路径='xbh'，要合并的分支='debug1_branch'
+# 仓库路径='xxx'，要合并的分支='debug1_branch'
 
 # 2. 进入目录
-cd xbh
+cd xxx
 
 # 3. 确认当前分支
 git branch --show-current

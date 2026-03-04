@@ -5,19 +5,19 @@
 ### 1. 方法中的代码修改(java/kotlin)
 必须使用以下格式包围修改的代码：
 ```
-// XBH_AI_PATCH_START
+// AI_AGENT_PATCH_START
 // (若存在原代码则保留并注释)
-// XBH_AI_PATCH_MODIFY (若存在原代码则必须加上该标签)
+// AI_AGENT_PATCH_MODIFY (若存在原代码则必须加上该标签)
 // 具体修改内容的注释说明
 生成或修改的代码
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_END
 ```
 
 ### 2. 生成新类(java/kotlin)
 必须在类定义前添加以下格式的Javadoc注释：
 ```
 /**
- * label: XBH_AI_PATCH
+ * label: AI_AGENT_PATCH
  * desc: 类的功能描述
  * author: 开发者名称
  * time: YYYY-MM-DD HH:mm:ss
@@ -30,12 +30,12 @@ class 类名 {
 ### 3. XML文件修改
 必须使用以下格式包围修改的代码：
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- (若存在原代码则保留并注释) -->
-<!-- XBH_AI_PATCH_MODIFY (若存在原代码则必须加上该标签) -->
+<!-- AI_AGENT_PATCH_MODIFY (若存在原代码则必须加上该标签) -->
 <!-- 具体修改内容的注释说明 -->
 生成或修改的XML代码
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 ## 字符串资源规范
@@ -67,52 +67,52 @@ res/
 
 **res/values-zh-rCN/strings.xml（简体中文）**
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 字符串资源定义 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：XX功能的提示文本 -->
 <string name="function_name_hint">请输入功能名称</string>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 **res/values-zh-rTW/strings.xml（繁体中文）**
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 字符串资源定义 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：XX功能的提示文本 -->
 <string name="function_name_hint">請輸入功能名稱</string>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 **res/values-ja/strings.xml（日语）**
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 字符串资源定义 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：XX功能的提示文本 -->
 <string name="function_name_hint">機能名を入力してください</string>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 **res/values/strings.xml（英文，默认）**
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 字符串资源定义 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：XX功能的提示文本 -->
 <string name="function_name_hint">Enter function name</string>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 **res/values-ko/strings.xml（韩语）**
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 字符串资源定义 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：XX功能的提示文本 -->
 <string name="function_name_hint">기능 이름을 입력하세요</string>
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 ### 4. 代码中使用字符串
@@ -120,36 +120,36 @@ res/
 
 **Kotlin示例**
 ```kotlin
-// XBH_AI_PATCH_START
+// AI_AGENT_PATCH_START
 // 使用字符串资源，避免硬编码
-// XBH_AI_PATCH_MODIFY
+// AI_AGENT_PATCH_MODIFY
 // 设置提示文本
 editText.hint = getString(R.string.function_name_hint)
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_END
 ```
 
 **Java示例**
 ```java
-// XBH_AI_PATCH_START
+// AI_AGENT_PATCH_START
 // 使用字符串资源，避免硬编码
-// XBH_AI_PATCH_MODIFY
+// AI_AGENT_PATCH_MODIFY
 // 设置提示文本
 editText.setHint(getString(R.string.function_name_hint));
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_END
 ```
 
 ### 5. 布局文件中使用字符串
 在布局文件中引用字符串资源时，使用以下方式：
 ```xml
-<!-- XBH_AI_PATCH_START -->
+<!-- AI_AGENT_PATCH_START -->
 <!-- 使用字符串资源 -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 功能描述：输入框提示文本 -->
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/function_name_hint" />
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 ### 6. 字符串命名规范

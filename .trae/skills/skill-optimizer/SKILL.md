@@ -541,10 +541,10 @@ ${SKILLS_ROOT}/skill-optimizer/
 ## wrong-judgment-2024-02-01
 
 ### 用户原始描述
-使用某个SKILL检查代码后，说分析错了，实际某个文件不需要XBH_AI_PATCH_MODIFY这个标签的，因为没有代码的修改。skill-optimizer只生成了change-log，没有实际优化该SKILL。
+使用某个SKILL检查代码后，说分析错了，实际某个文件不需要AI_AGENT_PATCH_MODIFY这个标签的，因为没有代码的修改。skill-optimizer只生成了change-log，没有实际优化该SKILL。
 
 ### 问题上下文
-用户使用某个SKILL检查代码规范，发现检查结果有误，某个文件中没有代码修改，但该SKILL错误地建议添加XBH_AI_PATCH_MODIFY标签。skill-optimizer判断问题与该SKILL强相关，但只生成了change-log文档，没有实际修改该SKILL的SKILL.md文件来修复这个逻辑错误。
+用户使用某个SKILL检查代码规范，发现检查结果有误，某个文件中没有代码修改，但该SKILL错误地建议添加AI_AGENT_PATCH_MODIFY标签。skill-optimizer判断问题与该SKILL强相关，但只生成了change-log文档，没有实际修改该SKILL的SKILL.md文件来修复这个逻辑错误。
 
 ### 错误原因
 1. change-log路径错误：在skill-optimizer目录下创建了change-log，而不是在被优化的SKILL目录下。错误地使用了skill-optimizer作为目录名，而不是被优化的SKILL名称。

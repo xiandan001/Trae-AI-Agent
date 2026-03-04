@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 > nul
 
-REM XBH_AI_PATCH_START
+REM AI_AGENT_PATCH_START
 REM Gerrit commit batch script
 REM Read commit-message.txt and execute git operations
-REM XBH_AI_PATCH_END
+REM AI_AGENT_PATCH_END
 
 REM Check if commit-message.txt exists
 if not exist "commit-message.txt" (
@@ -14,10 +14,10 @@ if not exist "commit-message.txt" (
     exit /b 1
 )
 
-REM XBH_AI_PATCH_START
-REM XBH_AI_PATCH_MODIFY
+REM AI_AGENT_PATCH_START
+REM AI_AGENT_PATCH_MODIFY
 REM Ask user if this is a new commit or amend existing one
-REM XBH_AI_PATCH_END
+REM AI_AGENT_PATCH_END
 
 echo.
 echo ========================================
@@ -50,10 +50,10 @@ echo.
 @REM     exit /b 0
 @REM )
 
-REM XBH_AI_PATCH_START
-REM XBH_AI_PATCH_MODIFY
+REM AI_AGENT_PATCH_START
+REM AI_AGENT_PATCH_MODIFY
 REM Use Git Bash to execute git operations with message from file
-REM XBH_AI_PATCH_END
+REM AI_AGENT_PATCH_END
 "C:\Program Files\Git\git-bash.exe" -c "git add . && %COMMIT_CMD% && git add . && git commit --amend --no-edit && BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$BRANCH && echo '' && echo ======================================== && echo Press Enter to close this window && echo ======================================== && read"
 
 echo.

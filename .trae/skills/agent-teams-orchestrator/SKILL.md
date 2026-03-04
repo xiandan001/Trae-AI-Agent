@@ -94,7 +94,7 @@ description: "Android 应用开发 Agent Teams 总管理调度器，实现共享
 │              Teammate 模式 = Task + 共享状态                      │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  Lango-Agent-Teams              Trae 实现                        │
+│  Agent-Teams                    Trae 实现                        │
 │  ──────────────────             ──────────                       │
 │  Task(team_name, name)   →   Task(subagent_type) + 状态文件     │
 │  teammate 加入团队        →   SubAgent 读写共享文件               │

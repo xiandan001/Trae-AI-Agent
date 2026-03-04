@@ -74,7 +74,7 @@ string_app_name.xml
 **示例：**
 ```java
 /**
- * label: XBH_AI_PATCH
+ * label: AI_AGENT_PATCH
  * desc: 用户信息管理类，提供用户数据的获取、更新和删除功能
  * author: 开发者名称
  * time: YYYY-MM-DD HH:mm:ss
@@ -104,12 +104,12 @@ public UserInfo getUserInfo(String userId) {
 
 **示例：**
 ```java
-// XBH_AI_PATCH_START
+// AI_AGENT_PATCH_START
 // 检查用户权限，如果没有权限则返回 false
 if (!checkPermission()) {
     return false;
 }
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_END
 ```
 
 ### 2.4 XML 注释
@@ -117,8 +117,8 @@ XML 文件中的复杂布局或重要元素需要添加注释。
 
 **示例：**
 ```xml
-<!-- XBH_AI_PATCH_START -->
-<!-- XBH_AI_PATCH_MODIFY -->
+<!-- AI_AGENT_PATCH_START -->
+<!-- AI_AGENT_PATCH_MODIFY -->
 <!-- 添加用户头像显示，支持圆形裁剪 -->
 <ImageView
     android:id="@+id/user_avatar"
@@ -126,7 +126,7 @@ XML 文件中的复杂布局或重要元素需要添加注释。
     android:layout_height="40dp"
     android:scaleType="centerCrop"
     app:civ_border_width="2dp" />
-<!-- XBH_AI_PATCH_END -->
+<!-- AI_AGENT_PATCH_END -->
 ```
 
 ## 3. 代码格式规范
@@ -237,7 +237,7 @@ public class ExampleActivity extends Activity {
 try {
     // 代码
 } catch (IOException e) {
-    Log.e(TAG, "文件读取失败", e);
+    Log.e(TAG, "文件读取失败:" + e);
     // 恢复或通知用户
 }
 
@@ -281,7 +281,7 @@ try {
 try {
     // 代码
 } catch (Exception e) {
-    Log.e(TAG, "操作失败", e);
+    Log.e(TAG, "操作失败: " + e);
     // 处理异常或向上抛出
 }
 ```
@@ -404,122 +404,74 @@ for (int i = 0; i < 1000; i++) {
 - 除非必要，不要导出组件（android:exported="false"）
 - 导出的组件需要权限保护
 
-## 10. 日志使用规范 【严重问题】
+## 10. 日志使用规范
 
-**严重程度：严重** - 使用非XbhLog日志组件属于严重问题，必须强制修改。
+### 10.1 日志组件使用要求
 
-### 10.1 XbhLog日志组件使用要求【强制】
+项目使用Android原生Log类进行日志打印，需遵循以下规范。
 
-项目**强制统一使用XbhLog日志组件**，**禁止使用Android原生Log、Timber等其他日志库**。
+#### 10.1.1 日志使用检查
 
-#### 10.1.1 依赖检查（首次使用时）
-
-首次使用日志时，需检查项目是否已添加XbhLog依赖：
-
-**检查步骤：**
-1. 检查Module的build.gradle中是否有以下依赖：
-```gradle
-dependencies {
-    implementation 'com.xbh.ability:log:0.0.8'
-}
-```
-2. 如果未添加，**必须主动添加依赖**
-
-#### 10.1.2 日志使用检查【强制】
-
-**强制要求：**
-- **必须使用XbhLog日志组件**
-- **禁止使用Android原生Log**（Log.v、Log.d、Log.i、Log.w、Log.e等）
-- **禁止使用Timber等其他日志库**
-- **禁止使用项目中的LogUtils**（如果有）
-- 发现使用非XbhLog日志组件时，**必须主动修改为XbhLog**
+**使用要求：**
+- 使用Android原生Log类进行日志打印
+- 确保日志级别使用正确
+- 避免在发布版本中打印敏感信息
 
 **正确示例：**
 ```java
-// XBH_AI_PATCH_START
-// 使用XbhLog打印日志
-// XBH_AI_PATCH_MODIFY
-XbhLog.v(TAG, "Verbose message");           // 详细日志
-XbhLog.d("Debug message");                   // 调试日志（使用全局TAG）
-XbhLog.i(TAG, "Info message");              // 信息日志
-XbhLog.w(TAG, "Warning message");           // 警告日志
-XbhLog.e(TAG, "Error message", exception);  // 错误日志（带异常）
-// XBH_AI_PATCH_END
+// AI_AGENT_PATCH_START
+// 使用Log打印日志
+// AI_AGENT_PATCH_MODIFY
+Log.v(TAG, "Verbose message");           // 详细日志
+Log.d(TAG, "Debug message");              // 调试日志
+Log.i(TAG, "Info message");               // 信息日志
+Log.w(TAG, "Warning message");            // 警告日志
+Log.e(TAG, "Error message: " + exception);   // 错误日志（带异常）
+// AI_AGENT_PATCH_END
 ```
 
-**错误示例（发现后必须立即修改）：**
+#### 10.1.2 日志规范最佳实践
+
 ```java
-// 错误：使用Android原生Log - 必须修改为XbhLog
-Log.d(TAG, "Debug message");
-Log.e(TAG, "Error message");
-
-// 错误：使用Timber - 必须修改为XbhLog
-Timber.d("Debug message");
-
-// 错误：使用LogUtils - 必须修改为XbhLog
-LogUtils.d(TAG, "Debug message");
-```
-
-#### 10.1.3 强制修复要求
-
-当发现日志使用不符合规范时，**必须主动执行以下修改**：
-
-**1. 依赖添加**：如果项目未添加XbhLog依赖，在build.gradle中添加：
-```gradle
-dependencies {
-    implementation 'com.xbh.ability:log:0.0.8'
+public class ExampleClass {
+    private static final String TAG = "ExampleClass";
+    
+    public void processData(String data) {
+        // 开发调试日志
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Processing data: " + sanitize(data));
+        }
+        
+        try {
+            // 业务逻辑
+            Log.i(TAG, "Data processed successfully");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to process data:" + e);
+        }
+    }
+    
+    private String sanitize(String data) {
+        // 脱敏处理，避免打印敏感信息
+        return data != null ? "***" : "null";
+    }
 }
 ```
 
-**2. 日志替换**：将所有非XbhLog日志调用替换为XbhLog：
-```java
-// 替换前
-Log.d(TAG, "message");
-Log.e(TAG, "error", exception);
-
-// 替换后
-// XBH_AI_PATCH_START
-// 替换为XbhLog日志组件
-// XBH_AI_PATCH_MODIFY
-XbhLog.d(TAG, "message");
-XbhLog.e(TAG, "error", exception);
-// XBH_AI_PATCH_END
-```
-
-**3. 日志级别映射表：**
-
-| 原日志调用 | XbhLog替换 |
-|-----------|-----------|
-| Log.v() | XbhLog.v() |
-| Log.d() | XbhLog.d() |
-| Log.i() | XbhLog.i() |
-| Log.w() | XbhLog.w() |
-| Log.e() | XbhLog.e() |
-| Timber.v() | XbhLog.v() |
-| Timber.d() | XbhLog.d() |
-| Timber.i() | XbhLog.i() |
-| Timber.w() | XbhLog.w() |
-| Timber.e() | XbhLog.e() |
-| LogUtils.v() | XbhLog.v() |
-| LogUtils.d() | XbhLog.d() |
-| LogUtils.i() | XbhLog.i() |
-| LogUtils.w() | XbhLog.w() |
-| LogUtils.e() | XbhLog.e() |
-
-**4. 添加import语句**：在文件顶部添加XbhLog的import：
-```java
-import com.xbh.log.XbhLog;
-```
+**修复建议：**
+- 如果发现日志级别使用不当，调整到合适的级别
+- 如果发现敏感信息打印，立即移除或进行脱敏处理
+- 如果TAG命名不规范，修改为类名或清晰的标识
+- 建议在发布版本中关闭或减少DEBUG和VERBOSE级别的日志
 
 ### 10.2 日志级别使用规范
 
 | 级别 | 常量 | 值 | 使用场景 |
 |------|------|-----|---------|
-| VERBOSE | XbhLog.VERBOSE | 2 | 详细的调试信息，通常只在开发阶段使用 |
-| DEBUG | XbhLog.DEBUG | 3 | 调试信息，帮助开发者了解程序的运行状态 |
-| INFO | XbhLog.INFO | 4 | 一般信息，反映程序的正常运行情况 |
-| WARN | XbhLog.WARN | 5 | 潜在问题或非关键错误，提示开发者注意 |
-| ERROR | XbhLog.ERROR | 6 | 严重错误，影响程序的正常运行，需要及时处理 |
+| VERBOSE | Log.VERBOSE | 2 | 详细的调试信息，通常只在开发阶段使用 |
+| DEBUG | Log.DEBUG | 3 | 调试信息，帮助开发者了解程序的运行状态 |
+| INFO | Log.INFO | 4 | 一般信息，反映程序的正常运行情况 |
+| WARN | Log.WARN | 5 | 潜在问题或非关键错误，提示开发者注意 |
+| ERROR | Log.ERROR | 6 | 严重错误，影响程序的正常运行，需要及时处理 |
 
 **级别选择指南：**
 - **VERBOSE**：用于详细的调试信息，如方法进入/退出、变量值跟踪等
@@ -539,10 +491,10 @@ public class UserManager {
     private static final String TAG = "UserManager";
     
     public void loadUser() {
-        // XBH_AI_PATCH_START
+        // AI_AGENT_PATCH_START
         // 使用类名作为TAG
-        XbhLog.d(TAG, "loadUser: start loading user");
-        // XBH_AI_PATCH_END
+        Log.d(TAG, "loadUser: start loading user");
+        // AI_AGENT_PATCH_END
     }
 }
 ```
@@ -555,36 +507,33 @@ public class UserManager {
 **错误示例：**
 ```java
 // 错误：打印敏感信息
-// XbhLog.d(TAG, "User password: " + password);
-// XbhLog.d(TAG, "Token: " + token);
-// XbhLog.d(TAG, "ID card: " + idCard);
+// Log.d(TAG, "User password: " + password);
+// Log.d(TAG, "Token: " + token);
+// Log.d(TAG, "ID card: " + idCard);
 ```
 
 **正确示例：**
 ```java
-// XBH_AI_PATCH_START
+// AI_AGENT_PATCH_START
 // 敏感信息脱敏处理
-XbhLog.d(TAG, "User login success");
-XbhLog.d(TAG, "Token: " + maskToken(token));
-// XBH_AI_PATCH_END
+Log.d(TAG, "User login success");
+Log.d(TAG, "Token: " + maskToken(token));
+// AI_AGENT_PATCH_END
 ```
 
-### 10.5 日志检查清单【严重问题】
-
-**严重程度：严重** - 以下检查项如果不符合规范，必须立即修改。
+### 10.5 日志检查清单
 
 在代码审查时，需要检查以下内容：
 
-- [ ] **【严重】是否使用了XbhLog日志组件** - 如未使用，必须立即修改
-- [ ] **【严重】是否存在使用Android原生Log、Timber等其他日志库的代码** - 如存在，必须立即替换为XbhLog
-- [ ] **【严重】首次使用日志时是否检查了依赖** - 如未添加依赖，必须先添加
 - [ ] 日志级别是否选择正确
 - [ ] TAG命名是否规范
 - [ ] 是否存在打印敏感信息的情况
+- [ ] 是否在循环中频繁打印日志
+- [ ] 发布版本是否关闭了调试日志
 
 **发现问题后的处理流程：**
-1. **立即标记为严重问题**
-2. **主动执行修复**（添加依赖、替换日志调用、添加import）
+1. **标记问题级别**
+2. **执行修复**（调整日志级别、脱敏处理、优化性能）
 3. **验证修复结果**
 
 ## 11. 兼容性规范

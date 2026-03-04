@@ -40,7 +40,7 @@ skills_reference: ["code-compliance-checker"]
 4. **【代码开发】执行修复**
    - 修复发现的代码问题
    - 优化代码结构
-   - 添加必要的代码注释（XBH_AI_PATCH 规范）
+   - 添加必要的代码注释（AI_AGENT_PATCH 规范）
 
 5. **【强制】输出结果**
    - 写入 `outputs/code_reviewer.json` 输出审查报告
@@ -111,7 +111,7 @@ skills_reference: ["code-compliance-checker"]
 | 可创建文件 | ✅ |
 | 可修改文件 | ✅ |
 | 文件类型 | `.kt`, `.java`, `.xml` |
-| 代码注释规范 | `XBH_AI_PATCH` |
+| 代码注释规范 | `AI_AGENT_PATCH` |
 
 ## 通信协议
 
@@ -141,7 +141,7 @@ skills_reference: ["code-compliance-checker"]
 | rule_3 | 必须读取所有 code_changes/*.json 了解代码变更 |
 | rule_4 | **【关键】** 必须调用 Skill: code-compliance-checker |
 | rule_5 | 必须执行代码审查，发现问题并修复 |
-| rule_6 | 代码修复必须遵循 XBH_AI_PATCH 注释规范 |
+| rule_6 | 代码修复必须遵循 AI_AGENT_PATCH 注释规范 |
 | rule_7 | 输出必须写入 outputs/code_reviewer.json |
 | rule_8 | 代码变更必须记录到 code_changes/code_reviewer.json |
 | rule_9 | **【消息】** 必须写入 messages/code_reviewer_to_lead.json |

@@ -164,7 +164,7 @@ adb logcat | grep -i schedule > schedule_log.txt
        PackageManager pm = context.getPackageManager();
        ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
    } catch (PackageManager.NameNotFoundException e) {
-       Log.e(TAG, "应用未找到", e);
+       Log.e(TAG, "应用未找到:" + e);
        // 处理应用未找到的情况
    }
    ```
@@ -181,7 +181,7 @@ adb logcat | grep -i schedule > schedule_log.txt
        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
    } catch (SecurityException e) {
-       Log.e(TAG, "设置定时任务失败", e);
+       Log.e(TAG, "设置定时任务失败: " + e);
        // 处理权限不足情况
    }
    ```
@@ -221,7 +221,7 @@ if (object instanceof String) {
 try {
     String str = (String) object;
 } catch (ClassCastException e) {
-    Log.e(TAG, "类型转换失败", e);
+    Log.e(TAG, "类型转换失败: " + e);
 }
 ```
 

@@ -1,11 +1,9 @@
-BUG-654592: [批注]手背擦除有残影
+BUG-xxxx: [xxx]xxx
 
-https://ones.lango-tech.com:7000/project/#/team/N1EEt2Js/task/T2gXHvY45lhId4u8
+https://xxx
 
 Why:
-1、由于G520U设备批注模式下，板擦位图腐蚀值为2f，不足以完全覆盖板擦位图的灰色边框，导致边缘区域擦除时产生残影；
+1、xxx
 
 How:
-1、新增PlatformUtil.isG520U()方法检测G520U平台，并添加XBH_BOARD_TYPE常量缓存；
-2、在AbstractEraser中新增getCorrosionValue()方法，G520U批注模式下返回3f增大腐蚀值；
-3、优化code-compliance-checker skill的XBH_AI_PATCH_MODIFY标签使用规则；
+1、xxx
