@@ -479,12 +479,11 @@ def handle_tie_vote(votes, scores):
 ### Phase 0: 初始化（含自动启动可视化）
 
 ```python
-# 1. 创建任务目录
-mkdir(".trae/agent-teams/{task-id}/")
-mkdir(".trae/agent-teams/{task-id}/outputs/")
-mkdir(".trae/agent-teams/{task-id}/messages/")
-mkdir(".trae/agent-teams/{task-id}/code_changes/")
-mkdir(".trae/agent-teams/{task-id}/visualizer/")
+# 1. 创建任务目录（使用 PowerShell 命令）
+RunCommand(
+  command="New-Item -ItemType Directory -Force -Path '.trae/agent-teams/{task-id}/outputs', '.trae/agent-teams/{task-id}/messages/inbox', '.trae/agent-teams/{task-id}/code_changes', '.trae/agent-teams/{task-id}/visualizer'",
+  blocking=True
+)
 
 # 2. 初始化 state.json
 Write(".trae/agent-teams/{task-id}/state.json", {
@@ -516,23 +515,43 @@ Write(".trae/agent-teams/{task-id}/messages/index.json", {
   "messages": []
 })
 
-# 4. 复制可视化文件到任务目录
-copy_files(
-  src=".trae/skills/agent-teams-visualizer/assets/",
-  dst=".trae/agent-teams/{task-id}/visualizer/"
-)
+# 4. ★★★ 复制可视化文件到任务目录（必须使用 Write 工具）★★★
+# 【重要】.trae 目录在黑名单中，不能使用 Copy-Item 命令
+# 必须使用 Read + Write 工具逐个复制文件
+
+# Step 4.1: 读取可视化源文件
+index_html = Read(".trae/skills/agent-teams-visualizer/assets/index.html")
+style_css = Read(".trae/skills/agent-teams-visualizer/assets/style.css")
+script_js = Read(".trae/skills/agent-teams-visualizer/assets/script.js")
+
+# Step 4.2: 写入到任务目录
+Write(".trae/agent-teams/{task-id}/visualizer/index.html", index_html)
+Write(".trae/agent-teams/{task-id}/visualizer/style.css", style_css)
+Write(".trae/agent-teams/{task-id}/visualizer/script.js", script_js)
+
+# Step 4.3: 验证文件是否写入成功（必须验证！）
+verify_html = Read(".trae/agent-teams/{task-id}/visualizer/index.html")
+verify_css = Read(".trae/agent-teams/{task-id}/visualizer/style.css")
+verify_js = Read(".trae/agent-teams/{task-id}/visualizer/script.js")
+
+if not verify_html or not verify_css or not verify_js:
+    raise Exception("可视化文件复制失败！必须确保三个文件都完整写入")
 
 # 5. ★ 自动启动可视化界面（HTTP 服务器）
-# 注意：必须在任务根目录启动服务器
+# 【重要】Windows PowerShell 使用分号分隔命令，不是 && 
 RunCommand(
-  command="python -m http.server 8080",
-  cwd=".trae/agent-teams/{task-id}/",  # ← 在任务根目录启动
+  command="Set-Location '.trae/agent-teams/{task-id}'; python -m http.server 8080",
   blocking=False,  # 非阻塞，后台运行
-  command_type="web_server"
+  command_type="web_server",
+  wait_ms_before_async=2000  # 等待服务器启动
 )
 
+# Step 5.1: 验证服务器是否启动成功
+server_status = CheckCommandStatus(command_id="<上一步的command_id>")
+if server_status.status != "running":
+    raise Exception("HTTP 服务器启动失败！")
+
 # 6. ★ 打开浏览器显示可视化界面
-# URL 指向 visualizer/ 目录，script.js 使用 ../ 访问上级目录的数据
 OpenPreview(
   command_id="<上一步的command_id>",
   preview_url="http://localhost:8080/visualizer/?task={task-id}"
@@ -556,7 +575,7 @@ Update("state.json", {
   "status": "ready",
   "progress": 5,
   "current_phase": 1,
-  "visualizer_url": "http://localhost:8080?task={task-id}"
+  "visualizer_url": "http://localhost:8080/visualizer/?task={task-id}"
 })
 ```
 

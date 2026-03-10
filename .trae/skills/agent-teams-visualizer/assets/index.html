@@ -3,228 +3,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Teams Office - Pixel Edition</title>
+    <title>Agent Teams Office - 2D Pixel Edition</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="pixel-container">
-        <!-- Header -->
-        <header class="pixel-header">
-            <div class="logo">🏢 Agent Teams Office</div>
-            <div class="task-info">
-                <span class="task-id">TASK-001</span>
-                <span class="timer">⏱️ <span id="timer">00:00:00</span></span>
+    <div class="game-container">
+        <!-- Header Bar -->
+        <header class="top-bar">
+            <div class="logo-area">
+                <div class="pixel-logo">🏢</div>
+                <div class="logo-text">AGENT TEAMS</div>
+            </div>
+            <div class="task-badge">
+                <span class="badge-label">TASK</span>
+                <span class="badge-value" id="task-id">001</span>
+            </div>
+            <div class="timer-display">
+                <div class="timer-icon">⏱</div>
+                <div class="timer-value" id="timer">00:00:00</div>
+            </div>
+            <div class="status-indicator" id="status-indicator">
+                <div class="status-dot"></div>
+                <span class="status-text">ONLINE</span>
             </div>
         </header>
 
-        <!-- Phase Indicator -->
-        <div class="phase-indicator">
-            <div class="phase" data-phase="1">
-                <span class="phase-icon">📋</span>
-                <span class="phase-name">Lead 评估</span>
-                <span class="phase-status">⏸️</span>
+        <!-- Phase Progress Bar -->
+        <div class="phase-track">
+            <div class="phase-node" data-phase="1">
+                <div class="node-icon">📋</div>
+                <div class="node-label">LEAD</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="2">
-                <span class="phase-icon">📝</span>
-                <span class="phase-name">Plan 规划</span>
-                <span class="phase-status">⏸️</span>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="2">
+                <div class="node-icon">📝</div>
+                <div class="node-label">PLAN</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="2.5">
-                <span class="phase-icon">🗳️</span>
-                <span class="phase-name">决策投票</span>
-                <span class="phase-status">⏸️</span>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="2.5">
+                <div class="node-icon">🗳️</div>
+                <div class="node-label">VOTE</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="3">
-                <span class="phase-icon">⚙️</span>
-                <span class="phase-name">并行分析</span>
-                <span class="phase-status">⏸️</span>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="3">
+                <div class="node-icon">⚙️</div>
+                <div class="node-label">BUILD</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="4">
-                <span class="phase-icon">📝</span>
-                <span class="phase-name">Code Review</span>
-                <span class="phase-status">⏸️</span>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="4">
+                <div class="node-icon">🔍</div>
+                <div class="node-label">REVIEW</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="5">
-                <span class="phase-icon">🧪</span>
-                <span class="phase-name">QA 测试</span>
-                <span class="phase-status">⏸️</span>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="5">
+                <div class="node-icon">🧪</div>
+                <div class="node-label">QA</div>
+                <div class="node-status"></div>
             </div>
-            <div class="phase-arrow">→</div>
-            <div class="phase" data-phase="6">
-                <span class="phase-icon">🎯</span>
-                <span class="phase-name">最终决策</span>
-                <span class="phase-status">⏸️</span>
-            </div>
-        </div>
-
-        <!-- Main Office Area -->
-        <div class="office-area">
-            <!-- Decision Room -->
-            <div class="room decision-room">
-                <div class="room-title">🗳️ Decision Room</div>
-                <div class="agents-row">
-                    <div class="agent-card pending" data-agent="tech_decision">
-                        <div class="agent-avatar">🔧</div>
-                        <div class="agent-name">Tech Decision</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                        <div class="agent-vote hidden">🗳️ -</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="business_decision">
-                        <div class="agent-avatar">💼</div>
-                        <div class="agent-name">Business</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                        <div class="agent-vote hidden">🗳️ -</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="risk_decision">
-                        <div class="agent-avatar">⚠️</div>
-                        <div class="agent-name">Risk Decision</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                        <div class="agent-vote hidden">🗳️ -</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Management Office -->
-            <div class="room management-room">
-                <div class="room-title">👔 Management Office</div>
-                <div class="agents-row">
-                    <div class="agent-card pending" data-agent="lead">
-                        <div class="agent-avatar">👔</div>
-                        <div class="agent-name">Lead Agent</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="plan">
-                        <div class="agent-avatar">📋</div>
-                        <div class="agent-name">Plan Agent</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                        <div class="agent-plans hidden">0 Plans Generated</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Development Area -->
-            <div class="room dev-room">
-                <div class="room-title">💻 Development Area</div>
-                <div class="agents-row">
-                    <div class="agent-card pending" data-agent="framework">
-                        <div class="agent-avatar">⚙️</div>
-                        <div class="agent-name">Framework</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="system">
-                        <div class="agent-avatar">🖥️</div>
-                        <div class="agent-name">System</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="data">
-                        <div class="agent-avatar">💾</div>
-                        <div class="agent-name">Data</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="ui_ux">
-                        <div class="agent-avatar">🎨</div>
-                        <div class="agent-name">UI/UX</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Support Room -->
-            <div class="room support-room">
-                <div class="room-title">🔧 Support Room</div>
-                <div class="agents-row">
-                    <div class="agent-card pending" data-agent="build">
-                        <div class="agent-avatar">📦</div>
-                        <div class="agent-name">Build</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="device">
-                        <div class="agent-avatar">📱</div>
-                        <div class="agent-name">Device</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="code_reviewer">
-                        <div class="agent-avatar">📝</div>
-                        <div class="agent-name">Reviewer</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                    <div class="agent-card pending" data-agent="qa">
-                        <div class="agent-avatar">🧪</div>
-                        <div class="agent-name">QA</div>
-                        <div class="agent-status pending">⏸️ Waiting</div>
-                    </div>
-                </div>
+            <div class="phase-line"></div>
+            <div class="phase-node" data-phase="6">
+                <div class="node-icon">🎯</div>
+                <div class="node-label">FINAL</div>
+                <div class="node-status"></div>
             </div>
         </div>
 
-        <!-- Voting Result Panel (初始隐藏) -->
-        <div class="voting-panel hidden">
-            <div class="panel-title">🗳️ Voting Result</div>
-            <div class="voting-bars">
-                <div class="vote-option" data-plan="A">
-                    <div class="vote-label">Plan A</div>
-                    <div class="vote-bar">
-                        <div class="vote-fill" style="width: 0%"></div>
+        <!-- Main Office Floor -->
+        <div class="office-floor">
+            <!-- Leader Office (Top Center) -->
+            <div class="office-section leader-office">
+                <div class="office-roof"></div>
+                <div class="office-interior">
+                    <div class="leader-workspace">
+                        <div class="desk-area">
+                            <div class="desk leader-desk">
+                                <div class="desk-surface"></div>
+                                <div class="computer"></div>
+                            </div>
+                        </div>
+                        <div class="robot-area">
+                            <div class="robot leader-robot" data-agent="lead">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                        <div class="mouth"></div>
+                                    </div>
+                                    <div class="robot-torso">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">👑</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">LEADER</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="vote-count">0 votes (0%)</div>
-                    <div class="vote-by"></div>
                 </div>
-                <div class="vote-option" data-plan="B">
-                    <div class="vote-label">Plan B</div>
-                    <div class="vote-bar">
-                        <div class="vote-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="vote-count">0 votes (0%)</div>
-                    <div class="vote-by"></div>
-                </div>
-                <div class="vote-option" data-plan="C">
-                    <div class="vote-label">Plan C</div>
-                    <div class="vote-bar empty">
-                        <div class="vote-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="vote-count">0 votes (0%)</div>
-                    <div class="vote-by"></div>
-                </div>
+                <div class="office-label">👔 LEADER OFFICE</div>
             </div>
-            <div class="vote-result hidden">
-                <span class="result-icon">📢</span>
-                <span class="result-text">Waiting for votes...</span>
+
+            <!-- Decision Room (Left Side) -->
+            <div class="office-section decision-room">
+                <div class="office-roof"></div>
+                <div class="office-interior">
+                    <div class="decision-room-layout">
+                        <div class="meeting-table-area">
+                            <div class="meeting-table">
+                                <div class="table-surface"></div>
+                            </div>
+                        </div>
+                        <div class="robots-row">
+                        <div class="robot decision-robot" data-agent="tech_decision">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna tech"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso tech">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">🔧</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">TECH</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                            <div class="vote-badge hidden">🗳️ -</div>
+                        </div>
+                        <div class="robot decision-robot" data-agent="business_decision">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna business"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso business">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">💼</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">BIZ</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                            <div class="vote-badge hidden">🗳️ -</div>
+                        </div>
+                        <div class="robot decision-robot" data-agent="risk_decision">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna risk"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso risk">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">⚠️</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">RISK</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                            <div class="vote-badge hidden">🗳️ -</div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="office-label">🗳️ DECISION ROOM</div>
+            </div>
+
+            <!-- Plan Station -->
+            <div class="office-section plan-station">
+                <div class="office-roof"></div>
+                <div class="office-interior">
+                    <div class="plan-station-layout">
+                        <div class="whiteboard-area">
+                            <div class="whiteboard">
+                                <div class="board-header">📋 PLANS</div>
+                                <div class="board-content">
+                                    <div class="plan-item">Plan A</div>
+                                    <div class="plan-item">Plan B</div>
+                                    <div class="plan-item">Plan C</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="robot-area">
+                            <div class="robot plan-robot" data-agent="plan">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna plan"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="robot-torso plan">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">📋</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">PLAN</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                                <div class="plans-count hidden">0 plans</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="office-label">📋 PLAN STATION</div>
+            </div>
+
+            <!-- Development Lab -->
+            <div class="office-section dev-lab">
+                <div class="office-roof"></div>
+                <div class="office-interior">
+                    <div class="workstations">
+                        <div class="workstation">
+                            <div class="robot dev-robot" data-agent="framework">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna dev"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="robot-torso dev">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">⚙️</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">FRAME</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                            </div>
+                            <div class="mini-desk"></div>
+                        </div>
+                        <div class="workstation">
+                            <div class="robot dev-robot" data-agent="system">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna sys"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="robot-torso sys">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">🖥️</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">SYSTEM</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                            </div>
+                            <div class="mini-desk"></div>
+                        </div>
+                        <div class="workstation">
+                            <div class="robot dev-robot" data-agent="data">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna data"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="robot-torso data">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">💾</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">DATA</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                            </div>
+                            <div class="mini-desk"></div>
+                        </div>
+                        <div class="workstation">
+                            <div class="robot dev-robot" data-agent="ui_ux">
+                                <div class="robot-body">
+                                    <div class="robot-head">
+                                        <div class="antenna ui"></div>
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="robot-torso ui">
+                                        <div class="screen">
+                                            <div class="screen-content"></div>
+                                        </div>
+                                        <div class="badge">🎨</div>
+                                    </div>
+                                    <div class="robot-arms">
+                                        <div class="arm left"></div>
+                                        <div class="arm right"></div>
+                                    </div>
+                                    <div class="robot-legs">
+                                        <div class="leg left"></div>
+                                        <div class="leg right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-name">UI/UX</div>
+                                <div class="robot-status">⏸️ IDLE</div>
+                            </div>
+                            <div class="mini-desk"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="office-label">💻 DEV LAB</div>
+            </div>
+
+            <!-- Support Center -->
+            <div class="office-section support-center">
+                <div class="office-roof"></div>
+                <div class="office-interior">
+                    <div class="support-stations">
+                        <div class="robot support-robot" data-agent="build">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna build"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso build">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">📦</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">BUILD</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                        </div>
+                        <div class="robot support-robot" data-agent="device">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna device"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso device">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">📱</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">DEVICE</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                        </div>
+                        <div class="robot support-robot" data-agent="code_reviewer">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna review"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso review">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">📝</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">REVIEW</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                        </div>
+                        <div class="robot support-robot" data-agent="qa">
+                            <div class="robot-body">
+                                <div class="robot-head">
+                                    <div class="antenna qa"></div>
+                                    <div class="eyes">
+                                        <div class="eye left"></div>
+                                        <div class="eye right"></div>
+                                    </div>
+                                </div>
+                                <div class="robot-torso qa">
+                                    <div class="screen">
+                                        <div class="screen-content"></div>
+                                    </div>
+                                    <div class="badge">🧪</div>
+                                </div>
+                                <div class="robot-arms">
+                                    <div class="arm left"></div>
+                                    <div class="arm right"></div>
+                                </div>
+                                <div class="robot-legs">
+                                    <div class="leg left"></div>
+                                    <div class="leg right"></div>
+                                </div>
+                            </div>
+                            <div class="robot-name">QA</div>
+                            <div class="robot-status">⏸️ IDLE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="office-label">🔧 SUPPORT</div>
+            </div>
+
+            <!-- Message Conveyor Belt -->
+            <div class="conveyor-belt" id="message-conveyor">
+                <div class="conveyor-label">📨 MESSAGE FLOW</div>
+                <div class="conveyor-track">
+                    <div class="messages-container" id="messages"></div>
+                </div>
             </div>
         </div>
 
-        <!-- Message Flow -->
-        <div class="message-flow">
-            <div class="panel-title">📨 Message Flow</div>
-            <div class="messages-container" id="messages">
-                <!-- 消息将通过 JavaScript 动态添加 -->
+        <!-- Voting Display Panel -->
+        <div class="voting-display hidden" id="voting-display">
+            <div class="voting-header">🗳️ VOTING RESULT</div>
+            <div class="voting-arena">
+                <div class="vote-candidate" data-plan="A">
+                    <div class="candidate-box">
+                        <div class="candidate-label">PLAN A</div>
+                        <div class="candidate-votes">
+                            <div class="vote-bar-A"></div>
+                        </div>
+                        <div class="candidate-count">0</div>
+                    </div>
+                    <div class="voter-avatars"></div>
+                </div>
+                <div class="vote-candidate" data-plan="B">
+                    <div class="candidate-box">
+                        <div class="candidate-label">PLAN B</div>
+                        <div class="candidate-votes">
+                            <div class="vote-bar-B"></div>
+                        </div>
+                        <div class="candidate-count">0</div>
+                    </div>
+                    <div class="voter-avatars"></div>
+                </div>
+                <div class="vote-candidate" data-plan="C">
+                    <div class="candidate-box">
+                        <div class="candidate-label">PLAN C</div>
+                        <div class="candidate-votes">
+                            <div class="vote-bar-C"></div>
+                        </div>
+                        <div class="candidate-count">0</div>
+                    </div>
+                    <div class="voter-avatars"></div>
+                </div>
+            </div>
+            <div class="vote-result-banner hidden">
+                <span class="result-icon">🏆</span>
+                <span class="result-text">PLAN A WINS!</span>
             </div>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-section">
-            <div class="progress-label">
-                <span>📊 Progress</span>
-                <span class="progress-percent">0%</span>
+        <!-- Progress Display -->
+        <div class="progress-display">
+            <div class="progress-header">
+                <span class="progress-icon">📊</span>
+                <span class="progress-title">PROGRESS</span>
+                <span class="progress-percent" id="progress-percent">0%</span>
             </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0%"></div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+                <div class="progress-bar-pixels"></div>
             </div>
-            <div class="progress-phase">Phase 0: 初始化中</div>
+            <div class="progress-phase" id="progress-phase">INITIALIZING...</div>
+        </div>
+
+        <!-- Final Decision Banner -->
+        <div class="decision-banner hidden" id="decision-banner">
+            <div class="decision-content">
+                <div class="decision-icon" id="decision-icon">✅</div>
+                <div class="decision-text" id="decision-text">APPROVED</div>
+            </div>
+            <div class="decision-details">
+                <div class="detail-item">
+                    <span class="detail-label">QUALITY</span>
+                    <span class="detail-value" id="quality-score">--</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">COVERAGE</span>
+                    <span class="detail-value" id="test-coverage">--</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">SCOPE</span>
+                    <span class="detail-value" id="approved-scope">--</span>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer class="pixel-footer">
+        <footer class="bottom-bar">
             <div class="footer-left">
-                <span>🔴 Pixel Edition v1.0</span>
+                <span class="pixel-dot"></span>
+                <span>PIXEL EDITION v2.0</span>
+            </div>
+            <div class="footer-center">
+                <span class="refresh-info">AUTO-REFRESH: 2s</span>
             </div>
             <div class="footer-right">
-                <span>Auto-refresh: 2s</span>
-                <button class="pixel-btn" onclick="refreshData()">🔄 Refresh</button>
+                <button class="pixel-button" onclick="refreshData()">🔄 REFRESH</button>
             </div>
         </footer>
     </div>
